@@ -1,0 +1,8 @@
+# Elk Record gitignore
+
+.#*
+*~
+
+__pycache__
+
+.gdb_history
