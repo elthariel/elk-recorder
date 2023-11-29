@@ -6,8 +6,10 @@ from .volumes import Volumes
 
 
 class MainWindow(Gtk.ApplicationWindow):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kw):
+        kw['height-request'] = 320
+        kw['width-request'] = 480
+        super().__init__(*args, **kw)
         # Things will go here
 
         self.main_vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)

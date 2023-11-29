@@ -1,7 +1,7 @@
 import logging
 
 import gi
-from gi.repository import Gtk, Adw, Gst, Gio
+from gi.repository import Gtk, GLib, Gst, Gio
 
 from .volume import Volume
 
@@ -24,6 +24,14 @@ class Volumes(Gtk.Box):
         logger.debug("Volumes Manager created")
         for vol in self.mon.get_volumes():
             self.on_volume_added(self.mon, vol)
+
+        GLib.timeout_add_seconds(1, self.on_time_callback)
+
+    def on_time_callback(self):
+        for _, volume in self.volumes.items():
+            volume['widget'].on_time_callback()
+
+        return True
 
     def on_volume_added(self, _, vol):
         logger.debug(f"Volume added: {vol.get_name()}")
