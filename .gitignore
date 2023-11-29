@@ -3,6 +3,12 @@
 .#*
 *~
 
+scratch
+tests
+
+
 __pycache__
+dist/
+*.egg-info/
 
 .gdb_history

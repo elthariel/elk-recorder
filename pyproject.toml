@@ -1,0 +1,16 @@
+[project]
+name = "elkr"
+version = "0.0.1"
+dependencies = [
+  "PyGObject",
+  "pycairo"
+]
+
+[project.gui-scripts]
+elkr = "elkr:main"
+
+[build-system]
+requires = [
+  "setuptools"
+]
+build-backend = "setuptools.build_meta"
