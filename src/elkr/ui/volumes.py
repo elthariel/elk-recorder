@@ -17,6 +17,20 @@ class Volumes(Gtk.Box):
         self.mon = Gio.VolumeMonitor.get()
         self.volumes = {}
 
+        self.title_label = Gtk.Label.new()
+        self.title_label.set_markup('<span size="small">Volumes</span>')
+        self.title_label.props.margin_top = 4
+        self.title_label.props.margin_bottom = 4
+        self.append(self.title_label)
+
+        self.no_volumes_label = Gtk.Label.new()
+        self.no_volumes_label.set_markup(
+            '<span color="grey" size="small">No drives found. Insert a storage device</span>'
+        )
+        self.no_volumes_label.set_margin_top(8)
+
+        self.append(self.no_volumes_label)
+
         self.mon.connect('volume-added', self.on_volume_added)
         self.mon.connect('volume-changed', self.on_volume_changed)
         self.mon.connect('volume-removed', self.on_volume_removed)
@@ -43,6 +57,8 @@ class Volumes(Gtk.Box):
             'volume': vol
         }
 
+        self.no_volumes_label.hide()
+
         self.append(widget)
 
     def on_volume_changed(self, _, vol):
@@ -57,3 +73,6 @@ class Volumes(Gtk.Box):
         if uuid in self.volumes:
             self.remove(self.volumes[uuid]['widget'])
             del self.volumes[uuid]
+
+        if len(self.volumes) == 0:
+            self.no_volumes_label.show()

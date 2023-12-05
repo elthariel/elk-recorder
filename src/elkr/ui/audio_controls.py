@@ -19,7 +19,12 @@ class AudioControls(Gtk.Box):
         self.make_device_monitor()
         self.app.pipeline.connect('state-changed', self.on_pipeline_state_changed)
 
-        self.row = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 2)
+        self.control_label = Gtk.Label.new()
+        self.control_label.set_markup('<span size="small">Controls</span>')
+        self.control_label.props.margin_top = 4
+        self.control_label.props.margin_bottom = 4
+        self.append(self.control_label)
+        self.row = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 8)
         self.append(self.row)
         self.make_time_counter()
         self.make_buttons()
@@ -35,7 +40,12 @@ class AudioControls(Gtk.Box):
         self.monitor.start()
 
     def make_device_dropdown(self):
-        self.device_dropdown_label = Gtk.Label.new("Input")
+        self.device_dropdown_label = Gtk.Label.new()
+        self.device_dropdown_label = Gtk.Label.new()
+        self.device_dropdown_label.set_markup('<span size="small">Input</span>')
+        self.device_dropdown_label.props.margin_top = 4
+        self.device_dropdown_label.props.margin_bottom = 4
+
         self.append(self.device_dropdown_label)
         # self.device_dropdown = Gtk.ComboBoxText()
         self.device_dropdown = Gtk.DropDown.new_from_strings([])

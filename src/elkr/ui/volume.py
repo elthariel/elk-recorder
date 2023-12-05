@@ -13,6 +13,7 @@ STOP_ICON = 'media-playback-stop'
 class Volume(Gtk.Box):
     def __init__(self, parent, volume, *args, **kwargs):
         kwargs['orientation'] = Gtk.Orientation.HORIZONTAL
+        kwargs['spacing'] = 8
         super().__init__(*args, **kwargs)
 
         self.parent = parent
