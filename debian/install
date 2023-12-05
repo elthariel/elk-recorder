@@ -1,0 +1,2 @@
+# Copy application file
+debian/elkr.desktop usr/share/applications

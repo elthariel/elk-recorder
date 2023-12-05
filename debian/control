@@ -1,0 +1,51 @@
+Source: elkr
+Section: unknown
+Priority: optional
+Maintainer: Lta <contact@lta.io>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-sequence-python3,
+ pybuild-plugin-pyproject,
+ python3-setuptools,
+ python3-all
+#Testsuite: autopkgtest-pkg-python
+Standards-Version: 4.6.2
+Homepage: https://github.com/elthariel/elk-recorder
+Vcs-Browser: https://github.com/elthariel/elk-recorder
+Vcs-Git: https://github.com/elthariel/elk-recorder.git
+
+Package: python3-elkr
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${python3:Depends},
+ ${misc:Depends},
+ libgstreamer1.0-0,
+ libgtk-4-1,
+ libadwaita-1-0,
+ gstreamer1.0-plugins-base,
+ gstreamer1.0-plugins-good,
+ gobject-introspection,
+ libgirepository-1.0-1,
+ gir1.2-gstreamer-1.0,
+ gir1.2-gtk-4.0,
+ gir1.2-adw-1,
+ python3-gst-1.0,
+ python3-gi
+Suggests:
+ python-elkr-doc,
+ gstreamer1.0-pulseaudio,
+ gstreamer1.0-pipewire,
+Description: A tiny raspi audio recorder for live event (Python 3)
+ .
+
+Package: elkr-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${sphinxdoc:Depends},
+ ${misc:Depends},
+Description: elkr generated doc (common documentation)
+ This is the common documentation package.

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ELK Recorder
+Comment=Elektron Libre Recorder
+Exec=/usr/bin/elkr
+Terminal=false
+Type=Application
+Categories=Audio
+StartupNotify=true
+Keywords=Teuf;Tekno;FreeParty;Audio;Recorder;ELK
