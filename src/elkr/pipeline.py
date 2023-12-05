@@ -5,7 +5,7 @@ from gi.repository import Gst, GObject, GLib, GstAudio
 
 logger = logging.getLogger(__name__)
 
-FILESINK_QUEUE_SIZE_BYTES = 32 * pow(1024, 2)
+FILESINK_QUEUE_SIZE_BYTES = 32 * pow(1024, 1)
 
 class Pipeline(GObject.Object):
     @GObject.Signal(name='state-changed', flags=GObject.SignalFlags.RUN_LAST,
@@ -92,6 +92,7 @@ class Pipeline(GObject.Object):
 
         # Work around a bug in gstreamer pipewire implementation
         if new_src.__class__.__name__ == 'GstPipeWireSrc':
+            logger.debug("Pipewire source, enabling 'always-copy' property")
             new_src.props.always_copy = True
 
         self.add(new_src, 'source')
@@ -133,11 +134,11 @@ class Pipeline(GObject.Object):
         queue = Gst.ElementFactory.make("queue", None)
 
         # Limit the size of the queue in bytes
-        queue.props.max_size_buffers = 0
-        queue.props.max_size_bytes = FILESINK_QUEUE_SIZE_BYTES
+        # queue.props.max_size_buffers = 0
+        # queue.props.max_size_bytes = FILESINK_QUEUE_SIZE_BYTES
         # Drop new buffers when queue is full, preventing to block the whole pipeline if
         # a filesink is to slow.
-        queue.props.leaky = 1
+        # queue.props.leaky = 1
 
         self.pipeline.add(sink)
         self.pipeline.add(queue)

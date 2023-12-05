@@ -88,12 +88,15 @@ class AudioControls(Gtk.Box):
         self.app.pipeline.dump_dot()
 
     def on_device_monitor_message(self, bus, message):
-        t = message.type
+        # The int cast works around the bug described in
+        # https://bugzilla.gnome.org/show_bug.cgi?id=786948
+        # This didn't exist in more recent versions of gst/gst-python
+        t = int(message.type)
 
-        if t == Gst.MessageType.DEVICE_ADDED:
+        if t == int(Gst.MessageType.DEVICE_ADDED):
             device = message.parse_device_added()
             self.on_device_added(device)
-        elif t == Gst.MessageType.DEVICE_REMOVED:
+        elif t == int(Gst.MessageType.DEVICE_REMOVED):
             device = message.parse_device_removed()
             self.on_device_removed(device)
 
